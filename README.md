@@ -1,8 +1,8 @@
-# Trip Planner Application
+# CO2 Trip Planner
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-This is a Trip Planner application built with Node.js and Express. It uses the OpenTripPlanner2 API to retrieve travel itineraries and calculates the total CO2 emissions for each itinerary based on transportation modes.
+This is a CO2 Trip Planner application built with Node.js and Express. It uses the OpenTripPlanner2 API to retrieve travel itineraries and calculates the total CO2 emissions for each itinerary based on transportation modes.
 
 ## Prerequisites
 
