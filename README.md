@@ -22,7 +22,7 @@ git clone https://github.com/dyablohunter/trip-planner-rest-api.git
 2. Navigate to the project directory:
 
 ```
-cd trip-planner-application
+cd trip-planner-rest-api
 ```
 
 3. Install the dependencies using NPM:
