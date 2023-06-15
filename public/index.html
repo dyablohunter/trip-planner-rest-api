@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trip Planner</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Trip Planner</h1>
+        <form id="tripForm">
+            <div class="form-group">
+                <label for="mode">Mode:</label>
+                <select id="mode" name="mode">
+                    <option value="AIRPLANE">AIRPLANE</option>
+                    <option value="BICYCLE">BICYCLE</option>
+                    <option value="BICYCLE_RENT">BICYCLE_RENT</option>
+                    <option value="BUS">BUS</option>
+                    <option value="CAR">CAR</option>
+                    <option value="ESCOOTER">ESCOOTER</option>
+                    <option value="FERRY">FERRY</option>
+                    <option value="FUNICULAR">FUNICULAR</option>
+                    <option value="METRO">METRO</option>
+                    <option value="PUBLIC_TRANSIT">PUBLIC_TRANSIT</option>
+                    <option value="RAIL">RAIL</option>
+                    <option value="SCOOTER">SCOOTER</option>
+                    <option value="SHARED_BICYCLE">SHARED_BICYCLE</option>
+                    <option value="SUBWAY">SUBWAY</option>
+                    <option value="TAXI">TAXI</option>
+                    <option value="TRAIN">TRAIN</option>
+                    <option value="TRAM">TRAM</option>
+                    <option value="WALK" selected>WALK</option>
+                </select>
+
+            </div>
+            <h2>FROM</h2>
+            <div class="form-group">
+                <label for="fromLat">Latitude:</label>
+                <input type="text" id="fromLat" name="fromLat" value="44.43397625593947" required>
+            </div>
+            <div class="form-group">
+                <label for="fromLng">Longitude:</label>
+                <input type="text" id="fromLng" name="fromLng" value="26.004146101478128" required>
+            </div>
+            <h2>TO</h2>
+            <div class="form-group">
+                <label for="toLat">Latitude:</label>
+                <input type="text" id="toLat" name="toLat" value="44.42829261042245" required>
+            </div>
+            <div class="form-group">
+                <label for="toLng">Longitude:</label>
+                <input type="text" id="toLng" name="toLng" value="26.101117664019093" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('tripForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const mode = document.getElementById('mode').value;
+            const fromLat = document.getElementById('fromLat').value;
+            const fromLng = document.getElementById('fromLng').value;
+            const toLat = document.getElementById('toLat').value;
+            const toLng = document.getElementById('toLng').value;
+
+            const response = await fetch('/plan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    mode: mode,
+                    from: {
+                        latitude: parseFloat(fromLat),
+                        longitude: parseFloat(fromLng),
+                    },
+                    to: {
+                        latitude: parseFloat(toLat),
+                        longitude: parseFloat(toLng),
+                    },
+                }),
+            });
+
+            const data = await response.json();
+            console.log(data)
+            resultDiv.innerHTML = '<code>' + JSON.stringify(data, null, 2) + '</code>';
+        });
+    </script>
+</body>
+
+</html>
