@@ -116,6 +116,7 @@ app.post('/plan', async (req, res) => {
         const { mode, from, to } = req.body;
 
         // Make the request to the OpenTripPlanner2 server using fetch
+        // TRIED AXIOS, TRIED NODE-FETCH, using updated node default fetch here, still can't get itineraries
         const response = await fetch(
             'https://finland-staging.trip-planner.maas.global/otp/routers/default/plan' +
             `?fromPlace=${from.latitude},${from.longitude}` +
