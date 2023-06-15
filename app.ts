@@ -139,9 +139,11 @@ app.post('/plan', async (req, res) => {
         }
 
         const data = await response.json();
+        ////// IF I REMOVE VALIDATION IT WORKS, THERE IS SOMETHING WRONG WITH THE SCHEMA PROVIDED, NEED MORE INFO ABOUT WHAT LIBRARY TO USE, I TRIED: Joi, jsonschema, json-schema and the result is the same
+
         validateResponse(data);
 
-        // Calculate total CO2 emissions
+        // Calculate total CO2 emissions //// THIS MIGHT BE DONE DIFFERENTLY BUT SINCE I CANNOT GET ITINERARIES NO MATTER WHAT I DO, I DON'T KNOW HOW TO HANDLE IT
         data.plan.itineraries.forEach((itinerary) => {
             let totalCO2 = 0;
             itinerary.legs.forEach((leg) => {
